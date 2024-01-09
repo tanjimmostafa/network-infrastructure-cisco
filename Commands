@@ -1,0 +1,304 @@
+nasa_hq>
+nasa_hq>en
+nasa_hq#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+nasa_hq(config)#interface fastethernet 0/0
+nasa_hq(config-if)#ip address 10.10.8.129 255.255.255.192
+nasa_hq(config-if)#no shut
+nasa_hq(config-if)#exit
+nasa_hq(config)#
+nasa_hq(config)#interface serial 2/0
+nasa_hq(config-if)#ip address 10.10.8.193 255.255.255.252
+nasa_hq(config-if)#clock rate 64000
+nasa_hq(config-if)#no shut
+nasa_hq(config-if)#exit
+nasa_hq(config)#
+nasa_hq(config)#interface serial 3/0
+nasa_hq(config-if)#ip address 10.10.8.197 255.255.255.252
+nasa_hq(config-if)#clock
+nasa_hq(config-if)#clock rate 64000
+nasa_hq(config-if)#no shut
+nasa_hq(config-if)#exit
+nasa_hq(config)#
+
+nasa_hq(config)#ip route 10.10.0.0 255.255.252.0 10.10.8.194
+nasa_hq(config)#ip route 10.10.7.0 255.255.255.0 10.10.8.198
+nasa_hq(config)#
+
+nasa_hq>en
+nasa_hq#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+nasa_hq(config)#router rip
+nasa_hq(config-router)#version 2
+nasa_hq(config-router)#network 10.0.0.0
+nasa_hq(config-router)#no auto-summary
+nasa_hq(config-router)#exit
+nasa_hq(config)#exit
+nasa_hq#
+%SYS-5-CONFIG_I: Configured from console by console
+
+nasa_hq#ping 10.10.8.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.8.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/40/64 ms
+
+nasa_hq#ping 10.10.6.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.6.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 53/67/77 ms
+
+nasa_hq#ping 10.10.4.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.4.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 65/73/86 ms
+
+nasa_hq#
+nasa_hq#copy
+% Incomplete command.
+nasa_hq#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+nasa_hq#
+
+
+
+
+
+jsc>
+jsc>en
+jsc#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+jsc(config)#
+jsc(config)#int fastethernet 0/0
+jsc(config-if)#ip address 10.10.0.1 255.255.252.0
+jsc(config-if)#no shut
+jsc(config-if)#exit
+jsc(config)#
+jsc(config)#int serial 3/0
+jsc(config-if)#ip address 10.10.8.194 255.255.255.252
+jsc(config-if)#no shut
+jsc(config-if)#exit
+jsc(config)#
+jsc(config)#int serial 2/0
+jsc(config-if)#ip address 10.10.8.201 255.255.255.252
+jsc(config-if)#clock rate 64000
+jsc(config-if)#no shut
+jsc(config-if)#exit
+jsc(config)#
+jsc(config)#ip route 10.10.8.128 255.255.255.192 10.10.8.193
+jsc(config)#ip route 10.10.7.0 255.255.255.0 10.10.8.202
+jsc(config)#
+	
+jsc>en
+jsc#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+jsc(config)#router rip
+jsc(config-router)#network 10.0.0.0
+jsc(config-router)#no auto-summary
+jsc(config-router)#router rip
+jsc(config-router)#version 2
+jsc(config-router)#network 10.0.0.0
+jsc(config-router)#no auto-summary
+jsc(config-router)#exit
+jsc(config)#exit
+jsc#
+%SYS-5-CONFIG_I: Configured from console by console
+
+jsc#ping 10.10.4.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.4.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 58/68/78 ms
+
+jsc#ping 10.10.6.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.6.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 3/45/81 ms
+
+jsc#
+jsc#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+jsc#
+
+
+
+wh>
+wh>en
+wh#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+wh(config)#int fastethernet 0/0
+wh(config-if)#ip address 10.10.7.1 255.255.255.0
+wh(config-if)#no shut
+wh(config-if)#exit
+wh(config)#
+wh(config)#int serial 3/0
+wh(config-if)#ip address 10.10.8.202 255.255.255.252
+wh(config-if)#no shut
+wh(config-if)#exit
+wh(config)#
+
+wh(config)#int serial 6/0
+wh(config-if)#ip address 10.10.8.198 255.255.255.252
+wh(config-if)#no shut
+wh(config-if)#exit
+wh(config)#
+wh(config)#ip route 10.10.0.0 255.255.252.0 10.10.8.194
+wh(config)#ip route 10.10.8.128 255.255.255.192 10.10.8.197
+wh(config)#
+
+wh(config)#int serial 2/0
+wh(config-if)#ip address 10.10.8.205 255.255.255.252
+wh(config-if)#clock rate 64000
+wh(config-if)#no shut
+wh(config-if)#exit
+wh(config)#exit
+wh#
+%SYS-5-CONFIG_I: Configured from console by console
+
+wh#en
+wh#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+wh(config)#router rip
+wh(config-router)#version 2
+wh(config-router)#network 10.0.0.0
+wh(config-router)#no auto-summary
+wh(config-router)#exit
+wh(config)#exit
+wh#
+%SYS-5-CONFIG_I: Configured from console by console
+
+wh#ping 10.10.8.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.8.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/23/46 ms
+
+wh#ping 10.10.4.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.4.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 35/51/77 ms
+
+wh#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+wh#
+
+
+spacex_hq>en
+spacex_hq#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+spacex_hq(config)#int fastethernet 0/0
+spacex_hq(config-if)#ip address 10.10.8.1 255.255.255.128
+spacex_hq(config-if)#
+spacex_hq(config-if)#no shut
+spacex_hq(config-if)#exit
+spacex_hq(config)#
+spacex_hq(config)#int serial 6/0
+spacex_hq(config-if)#ip address 10.10.8.206 255.255.255.252
+spacex_hq(config-if)#no shut
+spacex_hq(config-if)#exit
+spacex_hq(config)#
+spacex_hq(config)#int serial 3/0
+spacex_hq(config-if)#ip address 10.10.8.209 255.255.255.252
+spacex_hq(config-if)#clock rate 64000
+spacex_hq(config-if)#no shut
+spacex_hq(config-if)#exit
+spacex_hq(config)#
+spacex_hq(config)#int serial 2/0
+spacex_hq(config-if)#ip address 10.10.8.213 255.255.255.252
+spacex_hq(config-if)#clock rate 64000
+spacex_hq(config-if)#no shut
+spacex_hq(config-if)#exit
+spacex_hq(config)#
+spacex_hq(config)#router rip
+spacex_hq(config-router)#version 2
+spacex_hq(config-router)#network 10.0.0.0
+spacex_hq(config-router)#no auto-summary
+spacex_hq(config-router)#exit
+spacex_hq(config)#exit
+spacex_hq#
+%SYS-5-CONFIG_I: Configured from console by console
+
+spacex_hq#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+spacex_hq#
+
+
+
+
+spx_satellite>en
+spx_satellite#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+spx_satellite(config)#int fastethernet 0/0
+spx_satellite(config-if)#ip address 10.10.6.1 255.255.255.0
+spx_satellite(config-if)#no shut
+spx_satellite(config-if)#exit
+spx_satellite(config)#
+spx_satellite(config)#int serial 2/0
+spx_satellite(config-if)#ip address 10.10.8.210 255.255.255.252
+spx_satellite(config-if)#no shut
+spx_satellite(config-if)#exit
+spx_satellite(config)#
+spx_satellite(config)#router rip
+spx_satellite(config-router)#version 2
+spx_satellite(config-router)#network 10.0.0.0
+spx_satellite(config-router)#no auto-summary
+spx_satellite(config-router)#exit
+spx_satellite(config)#exit
+spx_satellite#
+%SYS-5-CONFIG_I: Configured from console by console
+
+spx_satellite#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+spx_satellite#
+
+
+
+
+spx_rocket>en
+spx_rocket#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+spx_rocket(config)#int fastethernet 0/0
+spx_rocket(config-if)#ip address 10.10.4.1 255.255.254.0
+spx_rocket(config-if)#no shut
+spx_rocket(config-if)#exit
+spx_rocket(config)#
+spx_rocket(config)#int serial 3/0
+spx_rocket(config-if)#ip address 10.10.8.214 255.255.255.252
+spx_rocket(config-if)#no shut
+spx_rocket(config-if)#exit
+spx_rocket(config)#
+spx_rocket(config)#router rip
+spx_rocket(config-router)#version 2
+spx_rocket(config-router)#network 10.0.0.0
+spx_rocket(config-router)#no auto-summary
+spx_rocket(config-router)#exit
+spx_rocket(config)#exit
+spx_rocket#
+%SYS-5-CONFIG_I: Configured from console by console
+
+spx_rocket#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+spx_rocket#
